@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 import base64
 
-app = Flask(_name)  # правильно: __name_, а не name
+app = Flask(__name__)  # правильно: __name_, а не name
 
 @app.route('/decrypt', methods=['POST'])
 def decrypt():
@@ -20,6 +20,6 @@ def decrypt():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-# И это тоже: _name_ == '_main_'
-if _name_ == '_main_':
+# И это тоже: __name__ == '__main__'
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
